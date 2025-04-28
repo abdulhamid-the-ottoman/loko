@@ -1,0 +1,39 @@
+@c -*-texinfo-*-
+@c Loko Scheme Developer's Manual.
+@c Copyright © 2020 G. Weinholt
+@c SPDX-License-Identifier: EUPL-1.2+
+
+@node Apropos
+@section Apropos
+
+The @code{(loko apropos)} library exports procedures for looking up
+symbols in environments.
+
+@deffn Procedure apropos-list name [env]
+Search the names of the environment @var{env} and all loaded libraries
+for symbols containing the substring @var{name}, which can be a string
+or a symbol.
+
+If @var{env} is omitted then the default is to use the interaction
+environment.
+
+The returned list contains entries of these formats:
+
+@itemize
+@item
+(@var{library} @var{symbol}) -- this means that @var{library} exports
+the @var{symbol}. The library is loaded, but it may need to be
+imported.
+
+@item
+@var{symbol} -- this means that @var{symbol} is available in @var{env}.
+@end itemize
+
+This procedure should be compatible with the similarly named one in
+Chez Scheme.
+@end deffn
+
+@deffn Procedure apropos name [env]
+This is an analogue of the @code{apropos-list} procedure that is meant
+for interactive use.
+@end deffn

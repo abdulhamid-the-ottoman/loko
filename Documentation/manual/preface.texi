@@ -1,0 +1,211 @@
+@c -*-texinfo-*-
+@c Loko Scheme Developer's Manual.
+@c Copyright © 2019, 2020, 2021, 2022 G. Weinholt
+@c SPDX-License-Identifier: EUPL-1.2+
+
+@node Preface
+@unnumbered Preface
+
+I've been writing Scheme code for some time now. While doing so I was
+also working on Scheme implementations. This is the first one that
+seems to have come out okay.
+
+@i{G. Weinholt, 2019}
+
+@menu
+* Purpose::
+* Credits::
+* Loko License::
+@end menu
+
+
+@node Purpose
+@unnumberedsec Purpose, audience and scope
+
+This manual has two major parts: usage and internals. The first part
+is intended to let the developer start using Loko to write useful
+software. The second part goes into details on how Loko works and why
+things are the way they are.
+
+Some knowledge of Scheme is assumed for the usage part. The reader who
+has no prior knowledge of any Lisp dialect will initially find it
+difficult to parse the language.
+
+This is not a complete description of the Scheme language. The reader
+who wants a more detailed description of Scheme may want to read
+@url{https://www.scheme.com/tspl4/, The Scheme Programming Language}
+(TSPL) by R.@: Kent Dybvig. The language described in that book is the
+same language that you can use in Loko Scheme.
+
+This manual is also not a replacement for comments and descriptions in
+the code. Loko Scheme is not meant to be a closed box; you are
+supposed to open it up and look at the parts. Maybe even fix some to
+suit your situation. Loko Scheme needs its own source code to compile
+your programs, so every installation should come with source code.
+
+
+@node Credits
+@unnumberedsec Credits
+
+Many have brought ideas, techniques and instructions to fruition that
+later went into making Loko Scheme. It would not be what it is without
+their contributions to science.
+
+The syntax-case implementation is from @emph{r6rs-libraries} by
+Abdulaziz Ghuloum and R.@: Kent Dybvig, with bug fixes and
+improvements from Llewellyn Pritchard.
+
+The high-level optimizer @emph{cp0} is based on the chapter @emph{Fast
+and Effective Procedure Integration} from @emph{Extending the Scope of
+Syntactic Abstraction} by Oscar Waddell (Ph.D.@: thesis).
+
+The low-level optimizer is based on concepts taught in a course given
+by David Whalley in 2011.
+
+The register allocator, except for the bugs, is from @emph{Register
+Allocation via Graph Coloring} by Preston Briggs (Ph.D.@: thesis).
+
+The letrec handling is from @emph{Fixing Letrec (reloaded)} by
+Abdulaziz Ghuloum and R.@: Kent Dybvig.
+
+The Unicode algorithms are also by Abdulaziz Ghuloum and R.@: Kent
+Dybvig.
+
+The bignum algorithms are based on algorithms from @emph{BigNum Math}
+by Tom St Denis.
+
+The @code{list?} procedure uses Olin Shiver's version of Robert W.@:
+Floyd's cycle-finding algorithm.
+
+The @code{equal?} procedure is from the paper @emph{Efficient
+Nondestructive Equality Checking for Trees and Graphs} by Michael D.@:
+Adams and R.@: Kent Dybvig.
+
+Some intricate parts of the records implementation are from the
+reference implementation of SRFI-76 by Michael Sperber.
+
+The optimization of procedural records is based on the paper @emph{A
+Sufficiently Smart Compiler for Procedural Records} by Andy Keep and
+R.@: Kent Dybvig. It's not as good, but it's something.
+
+The list sorting code is from SLIB, was written Richard A.@: O'Keefe and
+is based on Prolog code by David H.@: D.@: Warren.
+
+The dynamic-wind code is from SLIB and was written by Aubrey Jaffer.
+
+The division magic, and many other wonderful hacks, is from the
+excellent book @emph{Hacker's Delight} by Henry S.@: Warren, Jr.@:,
+with foreword by one Guy L.@: Steele, Jr.!
+
+The fibers library is loosely based on @emph{Parallel Concurrent ML}
+by John Reppy, Claudio V.@: Russo and Yingqi Xiao. The API is based on
+Guile fibers by Andy Wingo and the implementation is closely related
+to his blog post @emph{a new concurrent ml}.
+
+The implementation of multiple values is based on @emph{An Efficient
+Implementation of Multiple Return Values in Scheme} by J.@: Michael
+Ashley and R.@: Kent Dybvig. Advice contained wherein not heeded.
+
+The R7RS-small standard library is based on code originally written by
+OKUMURA Yuki for the Yuni project.
+
+The floating point to string conversion is based on Bob Burger's code
+described in the paper @emph{Printing Floating-Point Numbers Quickly
+and Accurately}. Any bugs are our own.
+
+The pretty printer comes from Marc Feeley's implementation written way
+back in 1991.
+
+Thanks also to Abdulaziz Ghuloum for @emph{An Incremental Approach to
+Compiler Construction}, which helped me consolidate the Scheme
+compiler experience I had already accumulated through experimentation.
+
+
+@node Loko License
+@unnumberedsec How to License Loko Scheme
+@cindex EUPL
+@cindex license
+
+Loko Scheme is copyrighted software. The default legal state of
+software is that no rights are granted. However, Loko Scheme is
+licensed under a free software licence. This licence grants many
+permissions, but they are conditional on following the terms of the
+licence.
+
+@itemize @bullet
+@item
+Loko Scheme is licensed under
+@url{https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12,
+EUPL-1.2-or-later}. See the file @file{LICENSE} in the source code
+tree. If you haven't already, please go and read it. It's fairly
+short, easy to read, and available in many languages. The following
+points provide some guidance and explanations for your consideration,
+but they don't override the licence or any case law around it.
+
+@item
+The EUPL covers ``software as a service'' (SaaS) and other types of
+communicating Loko Scheme to the public. So if you make Loko Scheme
+available online as a compiler (e.g. like the Compiler Explorer at
+godbolt.org does with many other compilers) then that's the same as if
+you were giving your users a copy of the binary. Since the EUPL is a
+copyleft licence you then also need to provide the source. But this is
+limited to the ``essential functionalities''. Some possible scenarios
+where you have to give out the Loko Scheme source over the network is
+when you're using Loko Scheme as a compiler provided over the network,
+or if you're using the kernel functionality to provide a hosted
+execution environment.
+
+@item
+Programs compiled by Loko Scheme contain parts of Loko Scheme's
+runtime. The EUPL lets you combine Loko Scheme's runtime with your own
+program. See the article
+@url{https://joinup.ec.europa.eu/collection/eupl/news/why-viral-licensing-ghost,
+Why viral licensing is a ghost} for more details on this. This means
+that your program as a whole does not become licensed under the EUPL
+just because it was compiled with Loko Scheme; only those parts which
+were already under the EUPL. If it is your own program that you're
+compiling (even a commercial and proprietary program) then that is no
+problem. If the program is using another copyleft licence then there
+is potentially a problem if that other copyleft licence does not allow
+the combination with the EUPL. But the EUPL is designed to be
+compatible with several copyleft licenses, so it might still be okay.
+You can use
+@url{https://joinup.ec.europa.eu/collection/eupl/solution/joinup-licensing-assistant/jla-compatibility-checker,
+the Joinup Licensing Assistant} to check if you can combine Loko
+Scheme's runtime with that other work.
+
+@item
+If you're going to distribute Loko Scheme (or a program compiled with
+Loko Scheme) then note in particular the obligations of the licensee
+in § 5. If you distribute binaries built with Loko Scheme then you
+can't remove the notices from the binary. When you distribute a binary
+of a work compiled with Loko Scheme then you are also distributing
+parts of Loko Scheme. So when someone receives a copy of that binary
+then they have the right to get your modified copy of Loko Scheme,
+according to the terms of the EUPL. But as per the previous point
+above, this does not affect your own code that is in that binary.
+
+@item
+Previous releases of Loko Scheme were under the GNU Affero General
+Public License (AGPL). This meant that the AGPL covered the Scheme
+runtime in the binaries that were generated by those versions, which
+then covered the whole binary. This severely limited the usefulness of
+Loko Scheme. To get around this problem it would have been necessary
+to formulate an exception to the license, but this proved to be very
+difficult in practice. The EUPL gets around this problem.
+
+@item
+The files under the srfi directory are published under the terms of
+the MIT license. This license is conventional for SRFI implementations
+and makes it easier to adapt them for use with other Scheme
+implementations, which you are encouraged to do. Just don't remove the
+copyright and licence notices.
+
+@end itemize
+
+The source code is automatically checked against the
+@url{https://reuse.software/spec/, REUSE specification}.
+
+@c Local Variables:
+@c TeX-master: "loko.texi"
+@c End:

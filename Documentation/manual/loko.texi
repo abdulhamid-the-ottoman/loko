@@ -1,0 +1,128 @@
+\input texinfo   @c -*-texinfo-*-
+@c SPDX-FileCopyrightText: 2022 G. Weinholt
+@c
+@c SPDX-License-Identifier: EUPL-1.2+
+@c
+@c %**start of header
+@setfilename loko.info
+@settitle The Loko Scheme Developer's Manual
+@c %**end of header
+@include version.texi
+
+@c @tex
+@c \global\urefurlonlylinktrue
+@c @end tex
+
+@setchapternewpage odd
+
+@syncodeindex fn cp
+
+@copying
+This manual is for Loko Scheme @value{VERSION}, an
+optimizing Scheme compiler.
+
+Copyright @copyright{} 2019-2022 G. Weinholt
+
+Licensed under the EUPL version 1.2 or later.
+@end copying
+
+@c Same category SLIB uses
+@dircategory The Algorithmic Language Scheme
+@direntry
+* Loko Manual: (loko).          The Loko Scheme Developer's Manual
+@end direntry
+
+@titlepage
+@title The Loko Scheme Developer's Manual
+@author G. Weinholt
+
+@c  The following two commands
+@c  start the copyright page.
+@page
+@vskip 0pt plus 1filll
+@insertcopying
+
+@end titlepage
+
+@ifnottex
+@node Top, Preface, (dir), (dir)
+@top Loko Scheme
+
+@insertcopying
+@end ifnottex
+
+@menu
+* Preface::
+* Introduction::
+* Using Loko::                      How Loko comes into being.
+@c * Sample programs::
+* Library reference::               The emptiness inside of Loko.
+* Repair instructions::             How to react when Loko disintegrates.
+@c * FAQ::                             Frequently Asked Questions, nothing else.
+* Other resources::                 When nothing in this manual helped.
+@c TODO: Also include references to blog articles
+* Loko internals::                  What makes Loko go around.
+
+@c Appendices
+
+
+Indices
+
+* Index::
+@end menu
+
+@contents
+
+@include preface.texi
+@include introduction.texi
+@include usage.texi
+
+@node Library reference
+@chapter Library reference
+
+@menu
+* Standard libraries::          The @code{(rnrs)} and @code{(srfi :NNN)} libraries
+* Base library::                The @code{(loko)} library
+* Apropos::                     Symbol name lookup, @code{(loko apropos)}
+* Fibers::                      Lightweight concurrency, @code{(loko system fibers)}
+* Unsafe procedures::           Ways out of the box with @code{(loko system unsafe)}
+* Target libraries::            Libraries that don't work everywhere
+@end menu
+
+@include lib-std.texi
+@include lib-base.texi
+@include lib-apropos.texi
+@include lib-fibers.texi
+@include lib-unsafe.texi
+@include lib-target.texi
+
+@node Repair instructions
+@chapter Repair instructions
+
+@menu
+* Tools support::               How to get the coconut open
+@end menu
+
+@include rep-tools.texi
+
+@node Other resources
+@chapter Other resources
+
+@include resources.texi
+
+@node Loko internals
+@chapter Loko internals
+
+@menu
+* Concurrency::                 Multiple timelines come together
+* Drivers::                     Interfacing with hardware, in theory
+* Interrupt handling::          When your process takes a forced vacation
+@end menu
+
+@include int-concurrency.texi
+@include int-drivers.texi
+@include int-interrupts.texi
+
+@include indices.texi
+
+@bye

@@ -1,0 +1,172 @@
+@c -*-texinfo-*-
+@c Loko Scheme Developer's Manual.
+@c Copyright © 2019, 2020 G. Weinholt
+@c SPDX-License-Identifier: EUPL-1.2+
+
+@node Introduction
+@chapter Introduction
+
+@node Scheme
+@section Scheme
+
+Scheme is a dialect of the Lisp programming language invented by Guy
+Lewis Steele Jr.@: and Gerald Jay Sussman in the mid 1970s. The first
+Lisp language was LISP, which was created by John McCarthy in the
+second half of the 1950s.
+
+Lisp's syntax uses S-expressions, which were created by McCarthy to
+represent LISP functions as data in his @emph{eval} function
+(published in 1960). @emph{Eval} is a one-page universal LISP function
+capable of running any other LISP function. The first LISP interpreter
+was created when Steve Russell compiled the @emph{eval} function by
+hand.
+
+Today many languages offer a large subset of the features of Lisp, and
+some attempt to offer those of Scheme as well. S-expressions are not
+added because it would turn those languages into Lisps.
+
+Distinctive features of Lisp languages are dynamic typing, garbage
+collection, and S-expressions (``symbolic expressions''). Scheme adds
+some additional distinctive features on top of those: static scoping,
+proper tail-recursion, hygienic macros, full continuations and
+@emph{dynamic-wind}.
+
+@itemize
+@item
+Dynamic typing means that the programmer does not need to prove to the
+compiler that a program is well-typed. This is beneficial because
+there are true statements about programs that are impossible to prove
+except by running the programs.
+
+@item
+Garbage collection is the automatic reclamation of unused memory. This
+is beneficial because there are programs that are impossible to write
+without it.
+
+@item
+S-expressions provide a convenient means to represent code as data, in
+a format that the Lisp programmer is used to working with, which
+enables automatic transformations via macros and dynamic evaluation
+through @emph{eval}. This is beneficial because there are programs
+that are impossible to write without dynamic code evaluation. It also
+relieves the programmer of having to guess how the parser will pick
+apart the code.
+
+@item
+Static scoping means that variable usage is connected with the binding
+of the variable as it appears in the text of the program. This is
+standard in most languages today, but Scheme is one of the few
+languages that gets this consistently right. (Dynamic scoping is
+available if needed through @emph{dynamic-wind}, because there are
+some programs that cannot be written without it).
+
+@item
+Proper tail-recursion provides a guarantee that when a procedure call
+appears in a @emph{tail context} (such as in the final expression of a
+procedure) no extra stack frame is used. This is beneficial because
+there are programs that cannot be written without proper
+tail-recursion.
+
+@item
+Hygienic macros means that a library can provide extensions to the
+Scheme syntax that are indistinguishable from built-in Scheme syntax,
+and hygiene means that these macros do not accidentally break static
+scoping. Less powerful macro systems are prone to the insertion of
+variables that conflict with those already used in the programs.
+
+@item
+(Continuations are usually explained in hopelessly abstract terms, so
+I will be very concrete here). @emph{Continuations are copies of the
+stack} and the state associated with @emph{dynamic-wind}. Many
+languages provide a way to escape upwards in the stack (e.g.@: longjmp
+or exceptions), but continuations also lets programs restore the stack
+to what it looked like when the continuation was captured. Imagine
+throwing an exception, thereby going up the stack, and then having the
+exception handler fix the problem and then go back down the stack to
+resume. Scheme is also unusual in that it lets continuations be
+reinstated multiple times. Continuations are useful because there are
+programs that cannot be written without them. Any control structure
+can be expressed with them, even those not built in to the language.
+
+@item
+@emph{Dynamic-wind} provides a means to run code when a part of the
+program is entered and then when it is exited. Continuations means
+that it can happen multiple times. This feature is useful because
+there are programs that cannot be written without it.
+
+@end itemize
+
+The features described above can be simulated in languages that lack
+them. Tail-recursion can be implemented manually by simulating a stack
+with a list, dynamic typing can be implemented with an abstract data
+type and type dispatching, garbage collection can be implemented for a
+data structure, and continuations can be implemented manually with
+continuation-passing style.
+
+Such simulations are always possible in the sense that any
+Turing-complete language can implement any other Turing-complete
+language. But these simulations will not exist on the same level as
+the host language and are therefore of an inferior nature.
+
+@node Scheme standards
+@section Scheme standards
+
+Scheme is standardized through two different types of documents. The
+first are called the @emph{Revised@sup{n} Reports on the Algorithmic
+Language Scheme (R@sup{n}RS)}. R@sup{5}RS came out in 1998 and was
+followed by R@sup{6}RS in 2007. R@sup{5}RS was also followed by
+R@sup{7}RS, which came out in 2013. Both of them are successors to
+R@sup{5}RS.
+
+The second type of documents are called @emph{Scheme Requests For
+Implementation (SRFI)}. This is a community-driven process whereby new
+language features can be developed and suggested for implementations
+to use. Many of them are mostly portable code, while other ones
+require adaptions to each Scheme implementation that wants to support
+them.
+
+
+@node Where Loko fits in
+@section Where Loko fits in
+
+Scheme has many implementations. Every known way to implement a
+programming language has probably been tried with Scheme. There are
+Scheme implementations for basically all operating systems and all
+types of machines. There have even been Scheme CPUs. Some say there
+are more implementations than applications. And Loko Scheme is one of
+those implementations.
+
+Every Scheme implementation has something that makes it unique. This
+is what is peculiar about Loko:
+
+@itemize
+@item
+Loko runs on bare metal (and on top regular Unix kernels).
+
+@item
+Loko builds statically linked binaries.
+
+@item
+Loko is written in only Scheme and a small amount of assembly.
+
+@item
+Loko's ABI is incompatible with C and does not use it on any level.
+
+@item
+Loko's runtime uses concurrency based on Concurrent ML.
+
+@item
+Loko supports both R@sup{6}RS and R@sup{7}RS libraries and programs.
+
+@item
+Loko provides the safety guarantees of R@sup{6}RS even for R@sup{7}RS
+code.
+
+@item
+Loko uses the hardware for free type checking (branchless @code{car},
+etc).
+@end itemize
+
+Due to some of the above, Loko Scheme is not suitable for every use
+case. There are plenty of other Scheme implementations available if
+Loko Scheme cannot work for your application.

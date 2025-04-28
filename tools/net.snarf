@@ -1,0 +1,125 @@
+;; -*- scheme -*-
+;; SPDX-FileCopyrightText: 2022 G. Weinholt
+;;
+;; SPDX-License-Identifier: EUPL-1.2+
+
+;; There's actually little reason to get these constants from netinet
+;; headers because they never change between systems, but it is nice
+;; to not invent new names for all these things.
+
+(c-include "netinet/ether.h")
+(fmt "%d")
+(struct ether_header ether_dhost ether_shost ether_type)
+ETH_ALEN
+
+(struct ether_arp arp_hrd arp_pro arp_hln arp_pln arp_op
+        arp_sha arp_spa arp_tha arp_tpa)
+ARPHRD_NETROM
+ARPHRD_ETHER
+ARPHRD_AX25
+ARPHRD_CHAOS
+
+ARPOP_REQUEST
+ARPOP_REPLY
+
+(fmt "#x%04x")
+ETHERTYPE_IPV6
+ETHERTYPE_IP
+ETHERTYPE_ARP
+ETHERTYPE_VLAN
+
+(c-include "netinet/ip6.h")
+(struct ip6_hdr ip6_vfc ip6_flow ip6_plen ip6_nxt ip6_hlim
+        ip6_src ip6_dst)
+(struct ip6_ext ip6e_nxt ip6e_len)
+(struct ip6_opt ip6o_type ip6o_len)
+
+(c-include "netinet/ip.h")
+(struct iphdr tos tot_len id frag_off
+        ttl protocol check saddr daddr)
+
+(c-include "netinet/in.h")
+(fmt "%d")
+IPPROTO_ICMP
+IPPROTO_ICMPV6
+IPPROTO_NONE
+IPPROTO_SCTP
+IPPROTO_TCP
+IPPROTO_UDP
+
+(c-include "netinet/udp.h")
+(struct udphdr uh_sport uh_dport uh_ulen uh_sum)
+
+(c-include "netinet/icmp6.h")
+(struct icmp6_hdr icmp6_type icmp6_code icmp6_cksum icmp6_data32)
+ICMP6_ECHO_REQUEST
+ICMP6_ECHO_REPLY
+MLD_LISTENER_QUERY
+MLD_LISTENER_REPORT
+MLD_LISTENER_REDUCTION
+ND_ROUTER_SOLICIT
+ND_ROUTER_ADVERT
+ND_NEIGHBOR_SOLICIT
+ND_NEIGHBOR_ADVERT
+ND_REDIRECT
+ICMP6_ROUTER_RENUMBERING
+
+(struct nd_opt_hdr nd_opt_type nd_opt_len)
+ND_OPT_SOURCE_LINKADDR
+ND_OPT_TARGET_LINKADDR
+ND_OPT_PREFIX_INFORMATION
+ND_OPT_REDIRECTED_HEADER
+ND_OPT_MTU
+ND_OPT_RTR_ADV_INTERVAL
+ND_OPT_HOME_AGENT_INFO
+
+(c-include "netinet/ip_icmp.h")
+(struct icmphdr type code checksum)
+;; Types
+ICMP_ECHOREPLY
+ICMP_DEST_UNREACH
+ICMP_SOURCE_QUENCH
+ICMP_REDIRECT
+ICMP_ECHO
+ICMP_TIME_EXCEEDED
+ICMP_PARAMETERPROB
+ICMP_TIMESTAMP
+ICMP_TIMESTAMPREPLY
+ICMP_INFO_REQUEST
+ICMP_INFO_REPLY
+ICMP_ADDRESS
+ICMP_ADDRESSREPLY
+
+;; Codes for the type ICMP_DEST_UNREACH
+ICMP_NET_UNREACH
+ICMP_HOST_UNREACH
+ICMP_PROT_UNREACH
+ICMP_PORT_UNREACH
+ICMP_FRAG_NEEDED
+ICMP_SR_FAILED
+ICMP_NET_UNKNOWN
+ICMP_HOST_UNKNOWN
+ICMP_HOST_ISOLATED
+ICMP_NET_ANO
+ICMP_HOST_ANO
+ICMP_NET_UNR_TOS
+ICMP_HOST_UNR_TOS
+ICMP_PKT_FILTERED
+ICMP_PREC_VIOLATION
+ICMP_PREC_CUTOFF
+
+;; Codes for the type ICMP_TIME_EXCEEDED
+ICMP_EXC_TTL
+ICMP_EXC_FRAGTIME
+
+(c-include "netinet/tcp.h")
+(struct tcphdr th_sport th_dport th_seq th_ack
+        th_flags th_win th_sum th_urp)
+(define offsetof-tcphdr-th_off 12)
+(fmt "#x%02x")
+TH_FIN
+TH_SYN
+TH_RST
+TH_PUSH
+TH_ACK
+TH_URG

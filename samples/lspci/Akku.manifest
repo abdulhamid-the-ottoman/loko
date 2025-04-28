@@ -1,0 +1,9 @@
+#!r6rs ; -*- mode: scheme; coding: utf-8 -*-
+(import (akku format manifest))
+
+(akku-package ("loko-lspci" "0.0.0-alpha.0")
+  (synopsis "Sample lspci for Loko")
+  (authors "G. Weinholt")
+  (license "EUPL-1.2+")
+  (depends)
+)

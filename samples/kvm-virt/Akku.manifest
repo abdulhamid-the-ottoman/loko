@@ -1,0 +1,11 @@
+#!r6rs ; -*- mode: scheme; coding: utf-8 -*-
+(import (akku format manifest))
+
+(akku-package ("loko-kvm-virt" "0.0.0-alpha.0")
+  (synopsis "Virtual machine (Loko sample)")
+  (authors "G. Weinholt")
+  (license "EUPL-1.2+")
+  (depends ("zabavno" "^0.2.0")
+           ("machine-code" "^2.1.0")
+           ("yxskaft" "^0.1.0"))
+)

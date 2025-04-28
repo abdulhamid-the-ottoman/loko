@@ -1,0 +1,22 @@
+#!/bin/sh
+# SPDX-License-Identifier: EUPL-1.2+
+# Copyright © 2023 Vadym Kochan <vadim4j@gmail.com>
+
+set -e
+
+SCHEME_LIST="scheme chez chez-scheme"
+SCHEME=""
+
+for scm in $SCHEME_LIST; do
+    if which $scm > /dev/null 2>&1 ; then
+        SCHEME=$scm
+        break
+    fi
+done
+
+if [ -z "$SCHEME" ]; then
+    echo "No scheme program found"
+    exit 1
+fi
+
+$SCHEME $@

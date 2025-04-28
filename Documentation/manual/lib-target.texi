@@ -1,0 +1,33 @@
+@c -*-texinfo-*-
+@c Loko Scheme Developer's Manual.
+@c Copyright © 2019, 2020 G. Weinholt
+@c SPDX-License-Identifier: EUPL-1.2+
+
+@node Target libraries
+@section Target libraries
+
+The following Linux-specific libraries are provided. Their usage
+mirrors 1:1 the functionality in the Linux manpages, section 2.
+
+@itemize
+@item
+@code{(loko arch amd64 linux-numbers)} -- constants used in the Linux
+syscall interface (UAPI).
+
+@item
+@code{(loko arch amd64 linux-syscalls)} -- thin wrappers around Linux
+syscalls.
+
+@item
+@code{(loko arch amd64 netbsd-numbers)} -- constants used in the
+NetBSD syscall interface.
+
+@item
+@code{(loko arch amd64 netbsd-syscalls)} -- thin wrappers around
+NetBSD/amd64 syscalls.
+
+@end itemize
+
+@c Local Variables:
+@c TeX-master: "loko.texi"
+@c End:

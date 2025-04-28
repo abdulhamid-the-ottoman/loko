@@ -1,0 +1,126 @@
+@c -*-texinfo-*-
+@c Loko Scheme Developer's Manual.
+@c Copyright © 2019 G. Weinholt
+@c SPDX-License-Identifier: EUPL-1.2+
+
+@node Tools support
+@section Tools support
+
+This section describes some tools can be used together with Loko
+Scheme when things go wrong.
+
+@menu
+* Disassembly::
+* Debugging::
+* Debug logs::
+* Profiling::
+* Memory checking::
+* Fuzzing::
+@end menu
+
+@node Disassembly
+@subsection Disassembly
+
+Loko can be disassembled using any regular disassembler that supports
+ELF and amd64, such as the one in GNU binutils and GNU gdb. There is
+also a built-in disassembler for procedures, @pxref{Base library,
+disassemble}.
+
+@node Debugging
+@subsection Debugging
+
+Loko can be debugged with @url{https://www.gnu.org/software/gdb/, GNU
+gdb} with the help of @file{loko-gdb.py}. Stack traces and pretty
+printing should work. Line information is currently missing.
+
+Scheme objects can get very big. Limit the output with e.g. @code{set
+print elements 5}.
+
+Traps from the processor are translated into conditions with a
+@code{&program-counter} condition, e.g.@: this error from trying to
+evaluate @code{(#f)}:
+
+@example
+The condition has 5 components:
+ 1. &assertion &violation &serious
+ 2. &who: apply
+ 3. &message: "Tried to call a non-procedural object"
+ 4. &irritants: (#f)
+ 5. &program-counter: #x309795
+End of condition components.
+@end example
+
+You can look up the trapping instruction with a disassembler.
+
+@node Debug logs
+@subsection Debug logs
+
+The PC port of Loko can have debug logging redirected from the VGA
+console with the @env{CONSOLE} environment variable:
+
+@itemize
+@item
+@code{CONSOLE=vga} prints to the VGA text mode console.
+
+@item
+@code{CONSOLE=com1} prints to COM1 (BIOS's default baud rate).
+
+@item
+@code{CONSOLE=debug} prints to QEMU's debug console. This is enabled
+with e.g. @code{-debugcon vc}.
+
+@end itemize
+
+@node Profiling
+@subsection Profiling
+
+Loko on Linux can be profiled with
+@url{https://perf.wiki.kernel.org/index.php/Main_Page, perf}.
+
+Some micro benchmarks can be done from inside Loko,
+@pxref{Base library, time-it*}.
+
+@node Memory checking
+@subsection Memory checking
+
+It's possible to run Loko in @url{http://valgrind.org/, Valgrind}.
+Valgrind does not support alignment checking, so Loko will print a
+warning about that. Loko also does not use the ``red zone'', so
+Valgrind will think that a lot of what Loko is doing uses
+uninitialized memory. Don't believe it.
+
+@node Fuzzing
+@subsection Fuzzing
+
+Loko can be used with @url{https://aflplus.plus/, AFL++}. This tool
+can explore all possible paths through a program in order to find
+crashes. You can use it to automatically check that, e.g., a parser
+does not crash on any inputs.
+
+The way to use it is to prepare a small program that reads from the
+standard input and passes it to the code under test. Build your
+program with @code{loko -fcoverage=afl++ program.sps}. This flag tells
+Loko to add branch instrumentation for AFL++. There is some overhead
+associated with this code, so only use it during fuzzing.
+
+The instrumented binary will mutate a memory area that is shared with
+@code{afl-fuzz}. Every @code{if} expression (including syntax which
+expands to an @code{if} expression) will mutate the area differently
+depending on whether the true or the false branch was taken. This
+should mean that the area gives a unique fingerprint for each path
+taken through the program.
+
+When fuzzing a program built with Loko you should normally run the
+fuzzer with @code{AFL_CRASH_EXITCODE=70 afl-fuzz -i inputs/ -o
+outputs/ -- ./program}, where inputs is a directory with files that
+contain sample inputs.
+
+It makes sense to verify that the interaction between AFL++ and the
+program is working as intended and that AFL++ detects crashes. This
+can be done by introducing an explicit crash in the program for
+certain inputs.
+
+A full discussion about AFL++ is out of scope for this manual. Please
+see the AFL++ website for more reading material.
+
+The instrumentation support has been tested with AFL++ 4.04c.

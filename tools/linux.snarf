@@ -1,0 +1,1204 @@
+;; -*- scheme -*-
+;; SPDX-FileCopyrightText: 2022 G. Weinholt
+;;
+;; SPDX-License-Identifier: EUPL-1.2+
+(c-include "asm/unistd.h")
+__NR_accept4
+__NR_arch_prctl
+__NR_bind
+__NR_brk
+__NR_chdir
+__NR_chown
+__NR_clock_getres
+__NR_clock_gettime
+__NR_clock_nanosleep
+__NR_clone3
+__NR_close
+__NR_connect
+__NR_dup3
+__NR_epoll_create1
+__NR_epoll_ctl
+__NR_epoll_pwait
+__NR_epoll_wait
+__NR_execve
+__NR_execveat
+__NR_exit
+__NR_exit_group
+__NR_faccessat
+__NR_fchdir
+__NR_fchmod
+__NR_fchmodat
+__NR_fchown
+__NR_fchownat
+__NR_fcntl
+__NR_fork
+__NR_fstat
+__NR_fstatfs
+__NR_ftruncate
+__NR_getcwd
+__NR_getdents64
+__NR_getegid
+__NR_geteuid
+__NR_getgid
+__NR_getgroups
+__NR_getpeername
+__NR_getpgid
+__NR_getpid
+__NR_getppid
+__NR_getpriority
+__NR_getrandom
+__NR_getsid
+__NR_getsockname
+__NR_getsockopt
+__NR_getuid
+__NR_io_uring_enter
+__NR_io_uring_register
+__NR_io_uring_setup
+__NR_ioctl
+__NR_kill
+__NR_lchown
+__NR_linkat
+__NR_listen
+__NR_lseek
+__NR_lstat
+__NR_madvise
+__NR_mkdirat
+__NR_mknodat
+__NR_mmap
+__NR_mprotect
+__NR_munmap
+__NR_nanosleep
+__NR_newfstatat
+__NR_open
+__NR_openat
+__NR_pipe2
+__NR_preadv2
+__NR_pwritev2
+__NR_read
+__NR_readlinkat
+__NR_recvfrom
+__NR_recvmsg
+__NR_renameat2
+__NR_rt_sigaction
+__NR_rt_sigprocmask
+__NR_rt_sigreturn
+__NR_sendmsg
+__NR_sendto
+__NR_setpgid
+__NR_setpriority
+__NR_setregid
+__NR_setreuid
+__NR_setsid
+__NR_setsockopt
+__NR_shmat
+__NR_shmctl
+__NR_shmdt
+__NR_shmget
+__NR_shutdown
+__NR_sigaltstack
+__NR_signalfd4
+__NR_socket
+__NR_socketpair
+__NR_stat
+__NR_statfs
+__NR_symlinkat
+__NR_timer_create
+__NR_timer_settime
+__NR_truncate
+__NR_umask
+__NR_uname
+__NR_unlinkat
+__NR_utimensat
+__NR_wait4
+__NR_waitid
+__NR_write
+__NR_writev
+
+(sizeof gid_t)
+(sizeof int)
+(sizeof void*)
+
+(c-include "asm/errno.h")
+EPERM
+ENOENT
+ESRCH
+EINTR
+EIO
+ENXIO
+E2BIG
+ENOEXEC
+EBADF
+ECHILD
+EAGAIN
+ENOMEM
+EACCES
+EFAULT
+ENOTBLK
+EBUSY
+EEXIST
+EXDEV
+ENODEV
+ENOTDIR
+EISDIR
+EINVAL
+ENFILE
+EMFILE
+ENOTTY
+ETXTBSY
+EFBIG
+ENOSPC
+ESPIPE
+EROFS
+EMLINK
+EPIPE
+EDOM
+ERANGE
+EDEADLK
+ENAMETOOLONG
+ENOLCK
+ENOSYS
+
+ENOTEMPTY
+ELOOP
+EWOULDBLOCK
+ENOMSG
+EIDRM
+ECHRNG
+EL2NSYNC
+EL3HLT
+EL3RST
+ELNRNG
+EUNATCH
+ENOCSI
+EL2HLT
+EBADE
+EBADR
+EXFULL
+ENOANO
+EBADRQC
+EBADSLT
+EDEADLOCK
+EBFONT
+ENOSTR
+ENODATA
+ETIME
+ENOSR
+ENONET
+ENOPKG
+EREMOTE
+ENOLINK
+EADV
+ESRMNT
+ECOMM
+EPROTO
+EMULTIHOP
+EDOTDOT
+EBADMSG
+EOVERFLOW
+ENOTUNIQ
+EBADFD
+EREMCHG
+ELIBACC
+ELIBBAD
+ELIBSCN
+ELIBMAX
+ELIBEXEC
+EILSEQ
+ERESTART
+ESTRPIPE
+EUSERS
+ENOTSOCK
+EDESTADDRREQ
+EMSGSIZE
+EPROTOTYPE
+ENOPROTOOPT
+EPROTONOSUPPORT
+ESOCKTNOSUPPORT
+EOPNOTSUPP
+EPFNOSUPPORT
+EAFNOSUPPORT
+EADDRINUSE
+EADDRNOTAVAIL
+ENETDOWN
+ENETUNREACH
+ENETRESET
+ECONNABORTED
+ECONNRESET
+ENOBUFS
+EISCONN
+ENOTCONN
+ESHUTDOWN
+ETOOMANYREFS
+ETIMEDOUT
+ECONNREFUSED
+EHOSTDOWN
+EHOSTUNREACH
+EALREADY
+EINPROGRESS
+ESTALE
+EUCLEAN
+ENOTNAM
+ENAVAIL
+EISNAM
+EREMOTEIO
+EDQUOT
+ENOMEDIUM
+EMEDIUMTYPE
+ECANCELED
+ENOKEY
+EKEYEXPIRED
+EKEYREVOKED
+EKEYREJECTED
+EOWNERDEAD
+ENOTRECOVERABLE
+ERFKILL
+EHWPOISON
+
+(c-include "asm/ioctls.h")
+(fmt "#x%x")
+TCGETS
+TCSETS
+TCSETSW
+TCSETSF
+TIOCGWINSZ
+
+(c-include "asm/termios.h")
+(struct winsize ws_row ws_col ws_xpixel ws_ypixel)
+
+(c-include "unistd.h")
+STDIN_FILENO
+STDOUT_FILENO
+STDERR_FILENO
+
+(ifdef "__amd64__")
+(c-include "asm/prctl.h")
+(fmt "#x%x")
+ARCH_SET_GS
+ARCH_SET_FS
+ARCH_GET_FS
+ARCH_GET_GS
+(endif)
+
+(c-include "asm/termbits.h")
+(fmt "#o%o")
+(struct termios c_iflag c_oflag c_cflag c_lflag c_line c_cc)
+(comment "c_iflag")
+IGNBRK
+BRKINT
+IGNPAR
+PARMRK
+INPCK
+ISTRIP
+INLCR
+IGNCR
+ICRNL
+IUCLC
+IXON
+IXANY
+IXOFF
+IMAXBEL
+IUTF8
+(comment "c_oflag")
+OPOST
+(comment "c_cflag")
+CBAUD
+B0
+B50
+B75
+B110
+B134
+B150
+B200
+B300
+B600
+B1200
+B1800
+B2400
+B4800
+B9600
+B19200
+B38400
+EXTA
+EXTB
+CSIZE
+CS5
+CS6
+CS7
+CS8
+CSTOPB
+CREAD
+PARENB
+PARODD
+HUPCL
+CLOCAL
+CBAUDEX
+BOTHER
+B57600
+B115200
+B230400
+B460800
+B500000
+B576000
+B921600
+B1000000
+B1152000
+B1500000
+B2000000
+B2500000
+B3000000
+B3500000
+B4000000
+CIBAUD
+CMSPAR
+CRTSCTS
+(comment "c_lflag")
+ISIG
+ICANON
+XCASE
+ECHO
+ECHOE
+ECHOK
+ECHONL
+NOFLSH
+TOSTOP
+ECHOCTL
+ECHOPRT
+ECHOKE
+FLUSHO
+PENDIN
+IEXTEN
+EXTPROC
+(comment "c_cc") (fmt "%d")
+NCCS
+VINTR
+VQUIT
+VERASE
+VKILL
+VEOF
+VTIME
+VMIN
+VSWTC
+VSTART
+VSTOP
+VSUSP
+VEOL
+VREPRINT
+VDISCARD
+VWERASE
+VLNEXT
+VEOL2
+(comment "tcsetattr")
+TCSANOW
+TCSADRAIN
+TCSAFLUSH
+
+(c-include "linux/signal.h")
+(fmt "%d")
+SIG_BLOCK
+SIG_UNBLOCK
+SIG_SETMASK
+(fmt "%d")
+SIGHUP
+SIGINT
+SIGQUIT
+SIGILL
+SIGTRAP
+SIGABRT
+SIGIOT
+SIGBUS
+SIGFPE
+SIGKILL
+SIGUSR1
+SIGSEGV
+SIGUSR2
+SIGPIPE
+SIGALRM
+SIGTERM
+SIGSTKFLT
+SIGCHLD
+SIGCONT
+SIGSTOP
+SIGTSTP
+SIGTTIN
+SIGTTOU
+SIGURG
+SIGXCPU
+SIGXFSZ
+SIGVTALRM
+SIGPROF
+SIGWINCH
+SIGIO
+(fmt "#x%x")
+SA_NOCLDSTOP
+SA_NOCLDWAIT
+SA_SIGINFO
+SA_ONSTACK
+SA_RESTART
+SA_NODEFER
+SA_RESETHAND
+SA_RESTORER                         ;obsolete?
+(struct sigaction sa_handler sa_flags sa_restorer sa_mask)
+(struct sigaltstack ss_sp ss_flags ss_size)
+(sizeof sigset_t)
+
+(c-include "asm/sigcontext.h")
+(ifdef __amd64__)
+(struct sigcontext_64 r8 r9 r10 r11 r12 r13 r14 r15
+        di si bp bx dx ax cx sp ip flags err trapno cr2)
+(endif)
+
+(c-include "asm/ucontext.h")
+(struct ucontext uc_flags uc_link uc_stack uc_mcontext uc_sigmask)
+
+(c-include "asm/siginfo.h")
+(fmt "#x%x")
+SI_USER
+SI_KERNEL
+(fmt "%d")
+SEGV_MAPERR
+SEGV_ACCERR
+BUS_ADRALN
+ILL_ILLOPN
+CLD_EXITED
+CLD_KILLED
+CLD_DUMPED
+CLD_TRAPPED
+CLD_STOPPED
+CLD_CONTINUED
+(struct* siginfo_t si_signo si_code si_errno si_trapno
+         si_pid si_uid si_tid si_overrun si_sys_private
+         si_status si_utime si_stime si_value si_int
+         si_ptr si_addr si_addr_lsb si_lower
+         si_upper si_pkey si_band si_fd si_call_addr
+         si_syscall si_arch)
+
+SIGEV_SIGNAL
+(struct sigevent sigev_value sigev_signo sigev_notify)
+
+(c-include "linux/signalfd.h")
+SFD_CLOEXEC
+SFD_NONBLOCK
+(struct signalfd_siginfo
+        ssi_signo ssi_errno ssi_code ssi_pid ssi_uid
+        ssi_fd ssi_tid ssi_band ssi_overrun ssi_trapno
+        ssi_status ssi_int ssi_ptr ssi_utime ssi_stime
+        ssi_addr ssi_addr_lsb ssi_syscall ssi_call_addr
+        ssi_arch)
+
+(c-include "linux/mman.h")
+(fmt "#x%x")
+MAP_SHARED
+MAP_PRIVATE
+MAP_FIXED
+MAP_ANONYMOUS
+MAP_32BIT
+MAP_GROWSDOWN
+MAP_STACK
+MAP_FIXED_NOREPLACE
+MAP_NORESERVE
+MAP_POPULATE
+MAP_HUGETLB
+MAP_HUGE_2MB
+MAP_HUGE_1GB
+PROT_NONE
+PROT_READ
+PROT_WRITE
+PROT_EXEC
+(fmt "%d")
+MADV_NORMAL
+MADV_RANDOM
+MADV_SEQUENTIAL
+MADV_WILLNEED
+MADV_DONTNEED
+MADV_FREE
+MADV_REMOVE
+MADV_DONTFORK
+MADV_DOFORK
+MADV_HWPOISON
+MADV_SOFT_OFFLINE
+MADV_MERGEABLE
+MADV_UNMERGEABLE
+MADV_HUGEPAGE
+MADV_NOHUGEPAGE
+MADV_DONTDUMP
+MADV_DODUMP
+MADV_WIPEONFORK
+MADV_KEEPONFORK
+MADV_COLD
+MADV_PAGEOUT
+
+(c-include "linux/shm.h")
+(fmt "#o%o")
+SHM_REMAP
+
+(c-include "linux/ipc.h")
+(fmt "%d")
+IPC_PRIVATE
+(fmt "#o%o")
+IPC_CREAT
+IPC_EXCL
+IPC_NOWAIT
+(fmt "%d")
+IPC_RMID
+IPC_SET
+IPC_STAT
+IPC_INFO
+(fmt "#x%x")
+IPC_64
+(fmt "%d")
+SEMOP
+SEMGET
+SEMCTL
+SEMTIMEDOP
+MSGSND
+MSGRCV
+MSGGET
+MSGCTL
+SHMAT
+SHMDT
+SHMGET
+SHMCTL
+
+(c-include "linux/time.h")
+CLOCK_REALTIME
+CLOCK_MONOTONIC
+CLOCK_PROCESS_CPUTIME_ID
+CLOCK_THREAD_CPUTIME_ID
+CLOCK_MONOTONIC_RAW
+CLOCK_REALTIME_COARSE
+CLOCK_MONOTONIC_COARSE
+CLOCK_BOOTTIME
+CLOCK_REALTIME_ALARM
+CLOCK_BOOTTIME_ALARM
+CLOCK_TAI
+(struct itimerspec it_interval it_value)
+(struct timespec tv_sec tv_nsec)
+
+(c-include "linux/auxvec.h")
+AT_NULL
+AT_IGNORE
+AT_EXECFD
+AT_PHDR
+AT_PHENT
+AT_PHNUM
+AT_PAGESZ
+AT_BASE
+AT_FLAGS
+AT_ENTRY
+AT_NOTELF
+AT_UID
+AT_EUID
+AT_GID
+AT_EGID
+AT_CLKTCK
+AT_PLATFORM
+AT_HWCAP
+AT_SECURE
+AT_BASE_PLATFORM
+AT_RANDOM
+AT_HWCAP2
+AT_EXECFN
+AT_SYSINFO_EHDR
+
+(c-include "linux/fcntl.h")
+AT_FDCWD
+(fmt "#o%o")
+O_ACCMODE
+O_RDONLY
+O_WRONLY
+O_RDWR
+O_CREAT
+O_EXCL
+O_NOCTTY
+O_TRUNC
+O_APPEND
+O_NONBLOCK
+O_DSYNC
+O_DIRECT
+O_LARGEFILE
+O_DIRECTORY
+O_NOFOLLOW
+O_NOATIME
+O_CLOEXEC
+O_SYNC
+O_PATH
+O_TMPFILE
+(fmt "%d")
+F_DUPFD
+F_DUPFD_CLOEXEC
+F_GETFD
+F_SETFD
+F_GETFL
+F_SETFL
+(fmt "#x%x")
+AT_SYMLINK_NOFOLLOW
+AT_REMOVEDIR
+AT_SYMLINK_FOLLOW
+AT_NO_AUTOMOUNT
+AT_EMPTY_PATH
+AT_STATX_SYNC_TYPE
+AT_STATX_SYNC_AS_STAT
+AT_STATX_FORCE_SYNC
+AT_STATX_DONT_SYNC
+(fmt "%d")
+FD_CLOEXEC
+
+(c-include "linux/wait.h")
+(fmt "#x%x")
+WNOHANG
+WUNTRACED
+WEXITED
+WCONTINUED
+WNOWAIT
+__WNOTHREAD
+__WALL
+__WCLONE
+(fmt "%d")
+P_ALL
+P_PID
+P_PGID
+P_PIDFD
+
+(c-include "linux/sched.h")
+(fmt "#x%x")
+CLONE_VM
+CLONE_FS
+CLONE_FILES
+CLONE_SIGHAND
+CLONE_PIDFD
+CLONE_PTRACE
+CLONE_VFORK
+CLONE_PARENT
+CLONE_THREAD
+CLONE_NEWNS
+CLONE_SYSVSEM
+CLONE_SETTLS
+CLONE_PARENT_SETTID
+CLONE_CHILD_CLEARTID
+CLONE_DETACHED
+CLONE_UNTRACED
+CLONE_CHILD_SETTID
+CLONE_NEWCGROUP
+CLONE_NEWUTS
+CLONE_NEWIPC
+CLONE_NEWUSER
+CLONE_NEWPID
+CLONE_NEWNET
+CLONE_IO
+(struct clone_args flags pidfd child_tid parent_tid
+        exit_signal stack stack_size tls)
+
+(c-include "linux/eventpoll.h")
+(struct epoll_event events data)
+(fmt "#x%x")
+EPOLLIN
+EPOLLPRI
+EPOLLOUT
+EPOLLERR
+EPOLLHUP
+EPOLLNVAL
+EPOLLRDNORM
+EPOLLRDBAND
+EPOLLWRNORM
+EPOLLWRBAND
+EPOLLMSG
+EPOLLRDHUP
+
+EPOLLEXCLUSIVE
+EPOLLWAKEUP
+EPOLLONESHOT
+EPOLLET
+
+(fmt "%d")
+EPOLL_CLOEXEC
+EPOLL_CTL_ADD
+EPOLL_CTL_DEL
+EPOLL_CTL_MOD
+
+(c-include "linux/fs.h")
+(fmt "%d")
+SEEK_SET
+SEEK_CUR
+SEEK_END
+SEEK_DATA
+SEEK_HOLE
+;; DT_UNKNOWN
+;; DT_FIFO
+;; DT_CHR
+;; DT_DIR
+;; DT_BLK
+;; DT_REG
+;; DT_LNK
+;; DT_SOCK
+;; DT_WHT
+
+(c-include "linux/stat.h")
+(struct stat
+        st_dev st_ino st_mode st_nlink st_uid st_gid
+        st_rdev st_size st_blksize st_blocks
+        st_atime st_atime_nsec
+        st_mtime st_mtime_nsec
+        st_ctime st_ctime_nsec)
+(fmt "#x%x")
+(define UTIME_NOW #x3fffffff)
+(define UTIME_OMIT #x3ffffffe)
+
+(c-include "asm/stat.h")
+(fmt "#o%o")
+S_IFMT
+S_IFLNK
+S_IFREG
+S_IFDIR
+S_IFCHR
+S_IFBLK
+S_IFIFO
+S_IFSOCK
+
+(c-include "asm/statfs.h")
+(struct statfs
+        f_type f_bsize f_blocks f_bfree
+        f_bavail f_files f_ffree f_fsid
+        f_namelen f_frsize f_flags f_spare)
+
+(c-include "linux/random.h")
+GRND_NONBLOCK
+GRND_RANDOM
+
+(c-include "linux/utsname.h")
+(struct/sizeof new_utsname
+               sysname nodename release version machine domainname)
+
+(c-include "linux/in6.h")
+(struct sockaddr_in6 sin6_family sin6_port sin6_flowinfo
+        sin6_addr sin6_scope_id)
+IPV6_V6ONLY
+
+(c-include "linux/un.h")
+(struct sockaddr_un sun_family sun_path)
+
+(c-include "linux/in.h")
+(struct sockaddr_in sin_family sin_port sin_addr)
+(fmt "%d")
+IPPROTO_IP
+IPPROTO_ICMP
+IPPROTO_TCP
+IPPROTO_UDP
+IPPROTO_SCTP
+
+(c-include "linux/tcp.h")
+(fmt "%d")
+TCP_NODELAY
+TCP_MAXSEG
+TCP_CORK
+TCP_KEEPIDLE
+TCP_KEEPINTVL
+TCP_KEEPCNT
+TCP_SYNCNT
+TCP_LINGER2
+TCP_DEFER_ACCEPT
+TCP_WINDOW_CLAMP
+TCP_INFO
+TCP_QUICKACK
+TCP_CONGESTION
+TCP_MD5SIG
+TCP_THIN_LINEAR_TIMEOUTS
+TCP_THIN_DUPACK
+TCP_USER_TIMEOUT
+TCP_REPAIR
+TCP_REPAIR_QUEUE
+TCP_QUEUE_SEQ
+TCP_REPAIR_OPTIONS
+TCP_FASTOPEN
+TCP_TIMESTAMP
+TCP_NOTSENT_LOWAT
+TCP_CC_INFO
+TCP_SAVE_SYN
+TCP_SAVED_SYN
+TCP_REPAIR_WINDOW
+TCP_FASTOPEN_CONNECT
+TCP_ULP
+TCP_MD5SIG_EXT
+TCP_FASTOPEN_KEY
+TCP_FASTOPEN_NO_COOKIE
+TCP_ZEROCOPY_RECEIVE
+TCP_INQ
+
+(c-include "asm/socket.h")
+(fmt "%d")
+SOL_SOCKET
+SO_DEBUG
+SO_REUSEADDR
+SO_TYPE
+SO_ERROR
+SO_DONTROUTE
+SO_BROADCAST
+SO_SNDBUF
+SO_RCVBUF
+SO_SNDBUFFORCE
+SO_RCVBUFFORCE
+SO_KEEPALIVE
+SO_OOBINLINE
+SO_NO_CHECK
+SO_PRIORITY
+SO_LINGER
+SO_BSDCOMPAT
+SO_REUSEPORT
+
+;; XXX: linux/if.h conflicts with linux/signal.h (Linux 5.4.13)
+;;(c-include "linux/if.h")
+(define IFNAMSIZ 16)
+(define offsetof-ifreq-ifr_flags 16)
+(define offsetof-ifreq-ifr_hwaddr 16)
+(define sizeof-ifreq 40)
+;; (struct sockaddr sa_family sa_data)
+(define offsetof-sockaddr-sa_family 0)
+(define offsetof-sockaddr-sa_data 2)
+(c-include "linux/if_tun.h")
+(fmt "%d")
+TUN_READQ_SIZE
+(fmt "#x%lx")                       ;ioctls
+TUNSETNOCSUM
+TUNSETDEBUG
+TUNSETIFF
+TUNSETPERSIST
+TUNSETOWNER
+TUNSETLINK
+TUNSETGROUP
+TUNGETFEATURES
+TUNSETOFFLOAD
+TUNSETTXFILTER
+TUNGETIFF
+TUNGETSNDBUF
+TUNSETSNDBUF
+TUNATTACHFILTER
+TUNDETACHFILTER
+TUNGETVNETHDRSZ
+TUNSETVNETHDRSZ
+TUNSETQUEUE
+TUNSETIFINDEX
+TUNGETFILTER
+TUNSETVNETLE
+TUNGETVNETLE
+TUNSETVNETBE
+TUNGETVNETBE
+TUNSETSTEERINGEBPF
+TUNSETFILTEREBPF
+TUNSETCARRIER
+(fmt "#x%x")
+TUNGETDEVNETNS
+(fmt "#x%x")
+IFF_TUN
+IFF_TAP
+IFF_NAPI
+IFF_NAPI_FRAGS
+IFF_NO_PI
+IFF_VNET_HDR
+IFF_TUN_EXCL
+IFF_MULTI_QUEUE
+IFF_ATTACH_QUEUE
+IFF_DETACH_QUEUE
+IFF_PERSIST
+IFF_NOFILTER
+TUN_PKT_STRIP
+TUN_F_CSUM
+TUN_F_TSO4
+TUN_F_TSO6
+TUN_F_TSO_ECN
+TUN_F_UFO
+(struct tun_pi flags proto)
+
+(c-include "linux/sockios.h")
+(fmt "#x%x")
+SIOCGIFHWADDR
+
+(c-include "linux/resource.h")
+PRIO_MIN
+PRIO_MAX
+PRIO_PROCESS
+PRIO_PGRP
+PRIO_USER
+(struct rusage ru_utime ru_stime ru_maxrss ru_ixrss ru_idrss ru_isrss
+        ru_minflt ru_majflt ru_nswap ru_inblock ru_oublock ru_msgsnd
+        ru_msgrcv ru_nsignals ru_nvcsw ru_nivcsw)
+
+(c-include "linux/uio.h")
+(struct iovec iov_base iov_len)
+
+;; This isn't in the UAPI headers. For the PF_ defines, just use
+;; the AF_ name, they are identical. Apparently some of these
+;; things can be different on some archs.
+(ifdef __amd64__)
+(fmt "%d")
+(define AF_UNSPEC 0)
+(define AF_LOCAL 1)
+(define AF_INET 2)
+(define AF_AX25 3)
+(define AF_NETROM 6)
+(define AF_INET6 10)
+(define AF_PACKET 17)
+(define AF_CAN 29)
+(fmt "%d")
+(define SOCK_STREAM 1)
+(define SOCK_DGRAM 2)
+(define SOCK_RAW 3)
+(define SOCK_SEQPACKET 5)
+(fmt "#x%x")
+(define SOCK_CLOEXEC O_CLOEXEC)
+(define SOCK_NONBLOCK O_NONBLOCK)
+(fmt "%d")
+(define SHUT_RD 0)
+(define SHUT_WR 1)
+(define SHUT_RDWR 2)
+(fmt "%d")
+(define SOL_IP 0)
+;; SOL_SOCKET
+(define SOL_TCP 6)
+(define SOL_UDP 17)
+(define SOL_IPV6 41)
+(define SOL_AX25 257)
+(define SOL_NETROM 259)
+(define SOL_PACKET 263)
+(fmt "#x%x")
+(define MSG_OOB #x1)
+(define MSG_PEEK #x2)
+(define MSG_DONTROUTE #x4)
+(define MSG_CTRUNC #x8)
+(define MSG_PROBE #x10)
+(define MSG_TRUNC #x20)
+(define MSG_DONTWAIT #x40)
+(define MSG_EOR #x80)
+(define MSG_WAITALL #x100)
+(define MSG_FIN #x200)
+(define MSG_SYN #x400)
+(define MSG_CONFIRM #x800)
+(define MSG_RST #x1000)
+(define MSG_ERRQUEUE #x2000)
+(define MSG_NOSIGNAL #x4000)
+(define MSG_MORE #x8000)
+(define MSG_WAITFORONE #x10000)
+(define MSG_BATCH #x40000)
+(define MSG_ZEROCOPY #x4000000)
+(define MSG_FASTOPEN #x20000000)
+(define MSG_CMSG_CLOEXEC #x40000000)
+(endif)
+
+(c-include "linux/kvm.h")
+(fmt "%d")
+KVM_API_VERSION
+(struct kvm_enable_cap cap flags args)
+(struct kvm_memory_region slot flags guest_phys_addr memory_size)
+(struct kvm_userspace_memory_region slot flags guest_phys_addr memory_size userspace_addr)
+(struct kvm_translation linear_address physical_address valid writeable usermode)
+(struct kvm_interrupt irq)
+(struct kvm_pit_config flags)
+(struct kvm_irqchip chip_id
+        chip.pic chip.ioapic)
+(struct kvm_irq_level irq status level)
+(struct kvm_ioeventfd datamatch addr len fd flags)
+(struct kvm_run request_interrupt_window immediate_exit
+        exit_reason ready_for_interrupt_injection if_flag flags
+        ;; KVM_EXIT_IO
+        io.direction io.size io.port io.count io.data_offset
+        ;; KVM_EXIT_MMIO
+        mmio.phys_addr mmio.data mmio.len mmio.is_write
+        ;; and many more
+        )
+
+KVM_GUESTDBG_ENABLE
+KVM_GUESTDBG_SINGLESTEP
+(struct kvm_guest_debug control
+        ;; There's also a copy of the debug registers here
+        )
+
+(c-include "asm/kvm.h")
+(ifdef __amd64__)
+(struct kvm_regs rax rbx rcx rdx rsi rdi rsp rbp r8 r9 r10 r11 r12 r13 r14 r15 rip rflags)
+(struct kvm_sregs cs ds es fs gs ss tr ldt gdt idt cr0 cr2 cr3 cr4 cr8 efer apic_base interrupt_bitmap)
+(struct kvm_dtable base limit)
+(struct kvm_segment base limit selector type present dpl db s l g avl)
+KVM_IRQCHIP_PIC_MASTER
+KVM_IRQCHIP_PIC_SLAVE
+KVM_IRQCHIP_IOAPIC
+(endif)
+KVM_NR_INTERRUPTS
+
+;; ioctls (alphabetically sorted)
+(fmt "#x%x")
+KVM_CHECK_EXTENSION
+KVM_CREATE_IRQCHIP
+KVM_CREATE_PIT2
+KVM_CREATE_VCPU
+KVM_CREATE_VM
+KVM_ENABLE_CAP
+KVM_GET_API_VERSION
+KVM_GET_EMULATED_CPUID
+KVM_GET_IRQCHIP
+KVM_GET_MSR_FEATURE_INDEX_LIST
+KVM_GET_MSR_INDEX_LIST
+KVM_GET_REGS
+KVM_GET_SREGS
+KVM_GET_SUPPORTED_CPUID
+KVM_GET_VCPU_MMAP_SIZE
+KVM_INTERRUPT
+KVM_IOEVENTFD
+KVM_IRQ_LINE
+KVM_IRQ_LINE_STATUS
+KVM_RUN
+KVM_SET_GUEST_DEBUG
+KVM_SET_IRQCHIP
+KVM_SET_REGS
+KVM_SET_SREGS
+KVM_SET_TSS_ADDR
+KVM_SET_USER_MEMORY_REGION
+KVM_TRANSLATE
+(fmt "%d")
+KVM_EXIT_UNKNOWN
+KVM_EXIT_EXCEPTION
+KVM_EXIT_IO
+KVM_EXIT_HYPERCALL
+KVM_EXIT_DEBUG
+KVM_EXIT_HLT
+KVM_EXIT_MMIO
+KVM_EXIT_IRQ_WINDOW_OPEN
+KVM_EXIT_SHUTDOWN
+KVM_EXIT_FAIL_ENTRY
+KVM_EXIT_INTR
+KVM_EXIT_SET_TPR
+KVM_EXIT_TPR_ACCESS
+KVM_EXIT_NMI
+KVM_EXIT_INTERNAL_ERROR
+KVM_EXIT_OSI
+KVM_EXIT_WATCHDOG
+KVM_EXIT_EPR
+KVM_EXIT_SYSTEM_EVENT
+KVM_EXIT_IOAPIC_EOI
+KVM_EXIT_HYPERV
+
+KVM_EXIT_IO_IN
+KVM_EXIT_IO_OUT
+
+KVM_CAP_IRQCHIP
+
+KVM_MEM_READONLY
+
+;; io_uring
+(c-include "linux/io_uring.h")
+(struct io_uring_params sq_entries cq_entries flags sq_thread_cpu
+        sq_thread_idle features wq_fd sq_off cq_off)
+IORING_SETUP_IOPOLL
+IORING_SETUP_SQPOLL
+IORING_SETUP_SQ_AFF
+IORING_SETUP_CQSIZE
+IORING_SETUP_CLAMP
+IORING_SETUP_ATTACH_WQ
+IORING_SETUP_R_DISABLED
+IORING_FEAT_SINGLE_MMAP
+IORING_FEAT_NODROP
+IORING_FEAT_SUBMIT_STABLE
+IORING_FEAT_RW_CUR_POS
+IORING_FEAT_CUR_PERSONALITY
+IORING_FEAT_FAST_POLL
+IORING_FEAT_POLL_32BITS
+IORING_ENTER_GETEVENTS
+IORING_ENTER_SQ_WAKEUP
+IORING_ENTER_SQ_WAIT
+
+(struct io_uring_cqe                    ;Completion Queue Event
+        user_data res flags)
+IORING_CQE_F_BUFFER
+IORING_CQE_BUFFER_SHIFT
+
+(struct io_uring_sqe                    ;Submission Queue Event
+        opcode
+        flags
+        ioprio
+        fd
+        off                             ;also: addr2
+        addr                            ;also: splice_off_in
+        len
+        msg_flags                       ;this has many other names
+        user_data
+        buf_index buf_group
+        personality
+        splice_fd_in)
+IORING_OP_NOP
+IORING_OP_READV
+IORING_OP_WRITEV
+IORING_OP_FSYNC
+IORING_OP_READ_FIXED
+IORING_OP_WRITE_FIXED
+IORING_OP_POLL_ADD
+IORING_OP_POLL_REMOVE
+IORING_OP_SYNC_FILE_RANGE
+IORING_OP_SENDMSG
+IORING_OP_RECVMSG
+IORING_OP_TIMEOUT
+IORING_OP_TIMEOUT_REMOVE
+IORING_OP_ACCEPT
+IORING_OP_ASYNC_CANCEL
+IORING_OP_LINK_TIMEOUT
+IORING_OP_CONNECT
+IORING_OP_FALLOCATE
+IORING_OP_OPENAT
+IORING_OP_CLOSE
+IORING_OP_FILES_UPDATE
+IORING_OP_STATX
+IORING_OP_READ
+IORING_OP_WRITE
+IORING_OP_FADVISE
+IORING_OP_MADVISE
+IORING_OP_SEND
+IORING_OP_RECV
+IORING_OP_OPENAT2
+IORING_OP_EPOLL_CTL
+IORING_OP_SPLICE
+IORING_OP_PROVIDE_BUFFERS
+IORING_OP_REMOVE_BUFFERS
+IORING_OP_TEE
+
+IOSQE_FIXED_FILE
+IOSQE_IO_DRAIN
+IOSQE_IO_LINK
+IOSQE_IO_HARDLINK
+IOSQE_ASYNC
+IOSQE_BUFFER_SELECT
+
+(struct io_sqring_offsets head tail ring_mask ring_entries
+        flags dropped array)
+IORING_SQ_NEED_WAKEUP
+IORING_SQ_CQ_OVERFLOW
+
+(struct io_cqring_offsets head tail ring_mask ring_entries
+        overflow cqes flags)
+IORING_CQ_EVENTFD_DISABLED
+
+(fmt "#x%x")
+IORING_OFF_SQ_RING
+IORING_OFF_CQ_RING
+IORING_OFF_SQES
+
+IORING_TIMEOUT_ABS
+
+(struct io_uring_probe_op op flags)
+(struct io_uring_probe last_op ops_len ops)
+IORING_REGISTER_PROBE
+IO_URING_OP_SUPPORTED
+
+;; Not really part of the Linux ABI, but says how to use exit()
+(c-include "sysexits.h")
+EX_OK
+EX_USAGE
+EX_DATAERR
+EX_NOINPUT
+EX_NOUSER
+EX_NOHOST
+EX_UNAVAILABLE
+EX_SOFTWARE
+EX_OSERR
+EX_OSFILE
+EX_CANTCREAT
+EX_IOERR
+EX_TEMPFAIL
+EX_PROTOCOL
+EX_NOPERM
+EX_CONFIG

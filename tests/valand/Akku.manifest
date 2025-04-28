@@ -1,0 +1,9 @@
+#!r6rs ; -*- mode: scheme; coding: utf-8 -*-
+(import (akku format manifest))
+
+(akku-package ("valand-test" "0.0.0-alpha.0")
+  (synopsis "Test of Valand on top of yxskaft")
+  (authors "G. Weinholt")
+  (license "EUPL-1.2+")
+  (depends ("yxskaft" "^0.2.0"))
+)

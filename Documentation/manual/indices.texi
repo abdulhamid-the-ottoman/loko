@@ -1,0 +1,11 @@
+@c -*-texinfo-*-
+@c Loko Scheme Developer's Manual.
+@c Copyright © 2019 G. Weinholt
+@c SPDX-License-Identifier: EUPL-1.2+
+
+@page
+@node Index
+@unnumbered Index
+@printindex cp
+
+@c TODO: More indices?

@@ -1,0 +1,13 @@
+#!r6rs ; -*- mode: scheme; coding: utf-8 -*-
+(import (akku format manifest))
+
+(akku-package ("loko-irc-server" "0.0.0-alpha.0")
+  (synopsis "IRC server sample for Loko Scheme")
+  (authors "G. Weinholt")
+  (license "EUPL-1.2+")
+  (depends ("industria" "^2.1.0")
+           ((chibi match) "^0.7.3")
+           ("irc-protocol" "^1.0.0")
+           ("wak-fmt" "^0.8.0-akku.10.d5b2a5a")
+           ("loko-srfi" "^1.0.1"))
+)

@@ -1,0 +1,9 @@
+#!r6rs ; -*- mode: scheme; coding: utf-8 -*-
+(import (akku format manifest))
+
+(akku-package ("loko-scheme" "0.12.1")
+  (synopsis "Scheme compiler for Linux, NetBSD/amd64 and PCs")
+  (authors "G. Weinholt")
+  (license "EUPL-1.2+")
+  (depends ("laesare" "^1.0.0") ("pfds" "^0.3.0") ("machine-code" "^2.2.0"))
+)

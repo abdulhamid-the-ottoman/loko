@@ -1,0 +1,13 @@
+#!r6rs ; -*- mode: scheme; coding: utf-8 -*-
+(import (akku format manifest))
+
+(akku-package ("pc-repl" "0.0.0-alpha.0")
+  (synopsis "REPL that runs on a PC")
+  (authors "G. Weinholt")
+  (license "EUPL-1.2+")
+  (depends ("ip-address" "^1.0.0")
+           ("fs-partitions" "^1.0.0-beta.0")
+           ("zabavno" "^0.2.0")
+           ("text-mode" "^1.0.0")
+           ("fs-fatfs" "^0.1.0"))
+)

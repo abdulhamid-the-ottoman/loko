@@ -1,0 +1,45 @@
+;; -*- mode: scheme; coding: utf-8 -*-
+;; SPDX-License-Identifier: EUPL-1.2+
+;; This file is a part of Loko Scheme, an R6RS Scheme system
+;; Copyright © 2019-2020 G. Weinholt
+#!r6rs
+
+;;; Global compile-time configuration
+
+(library (loko config)
+  (export
+    config-target-cpu
+    config-target-kernel
+    config-max-cpus
+    config-library-path
+    config-source-path
+    config-gdb-auto-load-path
+    loko-version)
+  (import
+    (rnrs)
+    (loko runtime parameters))
+
+;; This is the target the system will be running on.
+
+(define config-target-cpu
+  (make-parameter 'amd64))
+
+(define config-target-kernel
+  (make-parameter '@DEFAULT_TARGET@))
+
+(define (config-max-cpus)
+  16)
+
+(define (config-library-path)
+  '("@PREFIX@/share/r6rs"))
+
+;; Loko's source code will be installed here for use by (loko compiler
+;; static).
+(define (config-source-path)
+  "@PREFIX@/lib/loko")
+
+(define (loko-version)
+  "@VERSION@")
+
+(define (config-gdb-auto-load-path)
+  "@GDB_AUTOLOAD_PATH@"))

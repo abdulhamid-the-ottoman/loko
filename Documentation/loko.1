@@ -1,0 +1,159 @@
+.\" SPDX-FileCopyrightText: 2022 G. Weinholt
+.\" SPDX-License-Identifier: EUPL-1.2+
+.TH LOKO "1" "May 2022" "Loko Scheme" "Scheme"
+.SH "NAME"
+loko \- Scheme compiler
+.SH "SYNOPSIS"
+.SY loko
+.YS
+.SY loko
+.B \-\-program
+.I filename
+.SY loko
+.B \-\-script
+.I filename
+.SY scheme-script
+.I filename
+.YS
+.
+.SY loko
+.OP \-\-verbose\fR
+.OP \-ftarget=\fItarget\fR
+.OP \-fcp0-size-limit=\fIN\fR
+.OP \-fcp0-effort-limit=\fIN\fR
+.OP \-feval
+.OP \-ffreestanding
+.B \-\-compile
+.I infile
+.OP \-\-output \fIoutfile\fR
+.
+.
+.SH DESCRIPTION
+\fBLoko Scheme\fR is an optimizing compiler for the algorithmic language Scheme.
+It supports the R6RS and R7RS standards.
+.PP
+Loko can be run interactively by invoking it without arguments. There
+is no command line editor at this time, so it should be combined with
+rlwrap or perhaps emacs.
+.PP
+The interactive and script modes use an interpreter, which should be
+functionally equivalent to compiled code, but slower.
+.PP
+The compiler takes a top-level program and compiles it to a statically
+linked binary. The Loko Scheme runtime is embedded in the binary,
+along with any required libraries. A caveat is that the linked
+libraries are not available to eval, so they need to be available as
+source code in the library path.
+.
+.
+.SH OPTIONS
+The following options are recognized:
+.TP
+.B \-std=\fIlang\fR
+Select the language that will be supported. This currently only affects
+the semantics for top-level programs. These languages are supported:
+.I r6rs
+and
+.IR r7rs .
+R7RS programs can have multiple import declarations at the start of
+the program. In R6RS only the first is a declaration and the following
+ones are normal expressions that may be assigned a meaning through an
+imported library.
+.PP
+The following options are recognized when Loko is invoked as a compiler.
+.TP
+.B \-\-verbose
+Print verbose information about the code that is being compiled.
+.TP
+.B \-ftarget=\fItarget\fR
+Select the target that the binary will support. These are supported:
+.IR linux ,
+.IR netbsd ,
+.IR pc ,
+.IR pc+linux ", and"
+.IR polyglot .
+All targets except \fIpc\fR produce ELF binaries.
+All targets are for the AMD64 architecture.
+.
+.TP
+.B \-fcp0-size-limit=\fIN\fR
+The cp0 size limit changes how much cp0 will let the code grow.
+.
+.TP
+.B \-fcp0-effort-limit=\fIN\fR
+The cp0 effort limit changes how much time cp0 will spend on the code.
+.
+.TP
+.B \-feval
+Build with support for the interpreter. This means that eval,
+environment and related procedures are available.
+.
+.TP
+.B \-ffreestanding
+Build without the Scheme runtime library. This is generally only
+useful for testing the compiler. The whole expand-time Scheme language
+is available, but no standard libraries are available except for the
+compiler primitives.
+.
+.TP
+.B \-fcoverage=afl++
+Build with instrumentation for AFL++. See the manual for full
+instructions on how to use this for fuzzing.
+.
+.PP
+The following options are used to run a program or a script.
+.TP
+.B \-\-program \fIfilename\fR
+Runs the given file as a top-level R6RS program. The first form
+of the file must be an import form. This is also used for
+.BR scheme-script .
+.
+.TP
+.B \-\-script \fIfilename\fR
+Runs the given file as a script, which is similar to using the
+load procedure in the REPL. Definitions, expressions and imports
+can be mixed freely. Note that programs that work in this mode
+may fail to compile, because the compiler only handles top-level
+programs.
+.SH BUGS
+The compiler does not insert runtime checks for references to
+uninitialized bindings in letrec expressions.
+.
+.PP
+Send bug reports to
+.MT bugs@scheme.fail
+.ME .
+.
+.
+.SH EXAMPLES
+See the samples directory in the source code distribution.
+.SH ENVIRONMENT
+.ta \w'LOKO_LIBRARY_FILE_EXTENSIONS'u
+.nf
+\fILOKO_LIBRARY_FILE_EXTENSIONS\fR  library extensions (.loko.sls:.sls:.sld)
+\fILOKO_LIBRARY_PATH\fR             library directories (colon separated)
+\fILOKO_SOURCE\fR                   Loko source tree for compilation
+\fILOKO_HEAP\fR                     heap size in megabytes
+.
+.
+.SH AUTHOR
+Written by G. Weinholt.
+.
+.
+.SH COPYRIGHT
+Copyright \(co 2019\(en2023 G. Weinholt.
+.br
+Licensed under the EUPL v. 1.2 or later.
+.br
+.UR https://\:joinup.ec.europa.eu/\:collection/eupl
+.UE
+.
+.
+.SH "SEE ALSO"
+The full Loko Scheme manual is kept in Texinfo format. The manual can
+be browsed using the \fIinfo\fR if it was installed. It is also
+available in PDF and HTML formats on website.
+.PP
+The Loko Scheme website:
+.UR https://scheme.fail/
+.UE
